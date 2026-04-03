@@ -110,6 +110,8 @@ def load_case(case, modis_loc="../data/modis/truecolor/", labeled_loc="../data/v
     # Boundary labels
     boundary_aqua = np.unique(np.hstack([lb_aqua[1, :], lb_aqua[-1, :], lb_aqua[:, 1], lb_aqua[:, -1]]))
     boundary_terra = np.unique(np.hstack([lb_terra[1, :], lb_terra[-1, :], lb_terra[:, 1], lb_terra[:, -1]]))
+    regions_aqua['boundary'] = False
+    regions_terra['boundary'] = False
     for boundary_label in boundary_aqua:
         if boundary_label > 0:
             regions_aqua.loc[boundary_label, 'boundary'] = True

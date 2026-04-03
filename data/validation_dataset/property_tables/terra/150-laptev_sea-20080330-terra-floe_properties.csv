@@ -1,2 +1,2 @@
-label,area,convex_area,centroid-0,centroid-1,perimeter,axis_major_length,axis_minor_length,case_number
-1,92.0,98.0,290.4782608695652,147.82608695652175,34.970562748477136,12.86551825062817,9.23532861272935,150
+label,area,convex_area,centroid-0,centroid-1,perimeter,axis_major_length,axis_minor_length,boundary,case_number
+1,92.0,98.0,290.4782608695652,147.82608695652175,34.970562748477136,12.86551825062817,9.23532861272935,False,150
