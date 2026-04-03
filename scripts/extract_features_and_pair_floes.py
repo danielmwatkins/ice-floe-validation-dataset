@@ -7,7 +7,6 @@ The matching procedure includes the following
 1. Identification of floes with a high degree of overlap (IOU > 0.5)
 2. Overlaying imagery including potential matches for manual inspection
 3. Manual addition of selected floes with low overlap
-4. 
 
 """
 
@@ -164,8 +163,6 @@ for case_idx in range(len(cases)):
     aqua_dict[case_number] = regions_aqua
     terra_dict[case_number] = regions_terra
 
-
-    
     regions_aqua.to_csv('../data/validation_dataset/property_tables/aqua/' + cases[case_idx].replace('labeled_floes.tiff', 'floe_properties.csv'))
     regions_terra.to_csv('../data/validation_dataset/property_tables/terra/' + cases[case_idx].replace(
         'labeled_floes.tiff', 'floe_properties.csv').replace('aqua', 'terra'))
