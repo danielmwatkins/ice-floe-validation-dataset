@@ -11,10 +11,10 @@ The matching procedure includes the following
 """
 
 import skimage as sk
-import proplot as pplt
 import numpy as np
 import os
 import pandas as pd
+import ultraplot as uplt
 from skimage.color import rgba2rgb
 
 modis_loc = "../data/modis/truecolor/"
@@ -41,6 +41,7 @@ for row, case in zip(case_info.index, cases):
         lb_aqua = lb_aqua[:,:,0]
     if len(lb_terra.shape) != 2:
         lb_terra = lb_terra[:,:,0]
+        
     area_aqua = sk.measure.regionprops_table(lb_aqua, properties=['area'])['area']
     area_terra = sk.measure.regionprops_table(lb_terra, properties=['area'])['area']
 
@@ -106,6 +107,18 @@ def load_case(case, modis_loc="../data/modis/truecolor/", labeled_loc="../data/v
     regions_terra = pd.DataFrame(sk.measure.regionprops_table(
         lb_terra, properties=['label', 'area', 'convex_area', 'centroid', 'perimeter', 'axis_major_length', 'axis_minor_length'])).set_index('label')
 
+    # Boundary labels
+    boundary_aqua = np.unique(np.hstack([lb_aqua[1, :], lb_aqua[-1, :], lb_aqua[:, 1], lb_aqua[:, -1]]))
+    boundary_terra = np.unique(np.hstack([lb_terra[1, :], lb_terra[-1, :], lb_terra[:, 1], lb_terra[:, -1]]))
+    for boundary_label in boundary_aqua:
+        if boundary_label > 0:
+            regions_aqua.loc[boundary_label, 'boundary'] = True
+            lb_aqua[lb_aqua == boundary_label] = 0
+    for boundary_label in boundary_terra:
+        if boundary_label > 0:
+            regions_terra.loc[boundary_label, 'boundary'] = True
+            lb_terra[lb_terra == boundary_label] = 0
+            
     # Labels where there is some overlap
     aqua_labels = np.ravel(lb_aqua)
     terra_labels = np.ravel(lb_terra)
@@ -269,8 +282,10 @@ def adjust_matches(matches_dict, filter_dict, add_dict = {}):
                 keep_idx = init_idx + manu_idx
                 keep_idx.sort()
                 updated_matches[case] = matches_dict[case].loc[keep_idx, :].copy()
-                updated_matches[case].loc[init_idx, 'method'] = 'high_iou'
-                updated_matches[case].loc[manu_idx, 'method'] = 'low_iou_manual'
+                if len(init_idx) > 0:
+                    updated_matches[case].loc[init_idx, 'method'] = 'high_iou'
+                if len(manu_idx) > 0:
+                    updated_matches[case].loc[manu_idx, 'method'] = 'low_iou_manual'
             else:
                 print(case)
                 updated_matches[case] = pd.DataFrame(data=np.nan, columns=matches_dict[case].columns, index=[0])
@@ -303,7 +318,7 @@ def plot_match_images(regions_aqua, regions_terra, updated_matches, lb_aqua, lb_
     
     matches = updated_matches[case_number]
 
-    fig, axs = pplt.subplots(ncols=3, nrows=2)
+    fig, axs = uplt.subplots(ncols=3, nrows=2)
     ### Format ###
     # | TC_aqua         | TC_terra         | Floes Alone | 
     # | TC_aqua + masks | TC_terra + masks | Floes Matched |
@@ -364,10 +379,11 @@ def plot_match_images(regions_aqua, regions_terra, updated_matches, lb_aqua, lb_
                dt=pd.to_datetime(dt).strftime('%Y-%m-%d')))
     
     fig.save('../data/validation_dataset/matching_test_images/' + case_number + '_test_image.png', dpi=300)
-    pplt.close(fig)
+    uplt.close(fig)
 
 for case_idx in range(len(cases)):
     regions_aqua, regions_terra, matches, lb_aqua, lb_terra, tc_aqua, tc_terra = load_case(cases[case_idx])
     case_number = cases[case_idx].split('-')[0]
     # matches_dict[case_number] = matches
-    plot_match_images(regions_aqua, regions_terra, updated_matches, lb_aqua, lb_terra, tc_aqua, tc_terra, case_number)
+    if case_number in updated_matches:
+        plot_match_images(regions_aqua, regions_terra, updated_matches, lb_aqua, lb_terra, tc_aqua, tc_terra, case_number)
