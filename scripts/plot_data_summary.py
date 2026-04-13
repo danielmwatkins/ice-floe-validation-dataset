@@ -1,4 +1,4 @@
-import proplot as pplt
+import ultraplot as pplt
 import pandas as pd
 import numpy as np
 import cartopy.crs as ccrs
@@ -16,6 +16,8 @@ for satellite in ['aqua', 'terra']:
     for file in os.listdir('../data/validation_dataset/property_tables/' + satellite):
         if 'csv' in file:
             df_fsd = pd.read_csv('../data/validation_dataset/property_tables/' + satellite + '/' + file)
+            df_fsd = df_fsd.loc[~df_fsd.boundary, :].copy()
+            
             if len(df_fsd) > 0:
                 df_fsd['region'] = file.split('-')[1]
                 df_fsd['date'] = pd.to_datetime(file.split('-')[2])
@@ -46,7 +48,7 @@ for idx, row in regions.iterrows():
     if row.print_title == 'Bering Chukchi Seas':
         regions.loc[idx, 'print_title'] = 'Bering-Chukchi Seas'
 
-pplt.rc['cartopy.circular'] = False
+pplt.rc['geo.round'] = False
 pplt.rc['reso'] = 'med'
 crs = ccrs.NorthPolarStereo(central_longitude=-45, true_scale_latitude=70)
 fig, axs = pplt.subplots([[1, 3], [2, 3]], height=6, refwidth=4, refnum=3, share=False,
@@ -63,7 +65,7 @@ for idx, region, lat, lon in zip(range(len(regions)), regions.index, regions.cen
     xbox = np.array(regions.loc[region, ['left_x', 'left_x', 'right_x', 'right_x', 'left_x']].astype(float))
     ybox = np.array(regions.loc[region, ['lower_y', 'upper_y', 'upper_y', 'lower_y', 'lower_y']].astype(float))
     
-    ax.plot(xbox, ybox, transform=ccrs.CRS('epsg:3413'),
+    ax.plot(xbox, ybox, transform=crs,
             label='({n}) {t}'.format(n=idx + 1, t=regions.loc[region, 'print_title']), 
                color=colors[region], ls=linestyles[region], m='', zorder=5, lw=1.5)
     
