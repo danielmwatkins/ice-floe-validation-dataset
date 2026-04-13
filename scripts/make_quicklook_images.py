@@ -2,7 +2,7 @@
 import numpy as np
 import os
 import pandas as pd
-import proplot as pplt
+import ultraplot as pplt
 import rasterio as rio
 from rasterio.plot import reshape_as_image
 from sklearn.model_selection import KFold
