@@ -4,12 +4,13 @@ and the end of September, we open the corresponding daily CDR, and for each stud
 we select the area inside the region bounding box, and identify the pixels with SIC > 0.15 and the pixels inside the land
 and coast masks. We then calculate the sea ice fraction as SIC Pixels / (Total Pixels - Land Pixels). We then save these
 time series to data/metadata/daily_sea_ice_fraction.csv."""
+
 import numpy as np
 import pandas as pd
 import xarray as xr
 import os
 
-sic_dataloc = '/Users/dwatkin2/Documents/research/data/nsidc_daily_cdr_v4/' #check v5 variables for update
+sic_dataloc = '/Users/dwatkin2/Documents/research/data/nsidc_daily_cdr_v4/' 
 saveloc = '../data/metadata/'
 regions = pd.read_csv('../data/metadata/region_definitions.csv', index_col=0)
 print(regions)
@@ -34,7 +35,6 @@ def compute_sic(left_x, right_x, bottom_y, top_y, sic_data):
     sic_area_pixels = with_ice.sum().data
     return np.round(sic_area_pixels/(total_area_pixels - coast_mask.data), 3)
 
-# TBD: Update to 2006 for the MASIE data coverage?
 for year in range(2003, 2023):
     files = os.listdir(sic_dataloc + str(year))
     for file in files:
