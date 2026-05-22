@@ -1,6 +1,6 @@
 """Generate figure 2, the sea ice fraction climatology for the study regions."""
 import pandas as pd
-import proplot as pplt
+import ultraplot as pplt
 import numpy as np
 import warnings
 warnings.simplefilter('ignore')
@@ -53,4 +53,4 @@ for region in regions.index:
 ax.legend(loc='b', ncols=3,lw=2, order='F')
 ax.format(ylabel='Sea Ice Fraction', xlabel='Day of Year', ylim=(0, 1),
          ylocator=np.arange(0.1, 0.91, 0.2), xlim=(60, 274))
-fig.save('../figures/fig03_sea_ice_fraction.png', dpi=300)
+fig.save('../figures/fig_02_sea_ice_fraction.png', dpi=300)
