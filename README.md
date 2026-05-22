@@ -40,10 +40,11 @@ The figures directory has diagnostic and explanatory figures, including the sea 
 # citation
 The dataset will be described in an upcoming paper in _IEEE Transactions on Geoscience and Remote Sensing_ "Automated segmentation and tracking of sea ice floes from optical remote sensing imagery". If you use the dataset in your work, please cite the dataset as
 
-Watkins, D.M. (2025) "Ice Floe Validation Dataset", Zenodo, (doi: 10.5281/zenodo.17716713)[https://doi.org/10.5281/zenodo.17716713]
+Watkins, D.M. (2025) "Ice Floe Validation Dataset", Zenodo, [doi: 10.5281/zenodo.17716713](https://doi.org/10.5281/zenodo.17716713)
 
 The Zenodo DOI will always link to the newest version of the dataset.
 
 # acknowledgments
-Creation of the dataset was supported by grants from NASA and the US Office of Naval Research, under the direction of Dr. Monica Wilhelmus (wilhelmuslab.me)[https://wilhelmuslab.me]. Contributors to the data validation and labeling include Ellen Buckley, Minki Kim, Emma Slaght, and Ethan Register.
+Creation of the dataset was supported by grants from NASA and the US Office of Naval Research, under the direction of Dr. Monica Wilhelmus [wilhelmuslab.me](https://wilhelmuslab.me). Contributors to the data validation and labeling include Ellen Buckley, Minki Kim, Emma Slaght, and Ethan Register.
 
+We acknowledge the use of the NASA Worldview Snapshots tool for MODIS data access.
