@@ -1,7 +1,7 @@
-# Ice Floe Validation Dataset
+# ice floe validation dataset
 The Ice Floe Validation Dataset is a collection of randomly sampled 100 km by 100 km MODIS scenes from the _Aqua_ and _Terra_ satellites. This repository contains the dataset itself along with the notebooks and scripts used to produce the dataset.
 
-# Contents
+# contents
 ## data
 The data directory has subdirectories
 1. `/metadata` containing specification/config files
@@ -11,6 +11,7 @@ The data directory has subdirectories
    * binary_floes
    * binary_landfast
    * binary_landmask
+   * binary_water_samples
    * labeled_floes
    * labeling_psd_files
    * property_tables
@@ -36,14 +37,13 @@ Finally, the `/property_tables` contains the main metadata table with all case i
 ## figures
 The figures directory has diagnostic and explanatory figures, including the sea ice fraction climatology, the map of analyzed cases, and a summary of the metadata.
 
-# Citation
+# citation
 The dataset will be described in an upcoming paper in _IEEE Transactions on Geoscience and Remote Sensing_ "Automated segmentation and tracking of sea ice floes from optical remote sensing imagery". If you use the dataset in your work, please cite the dataset as
 
-Watkins, D.M. (2025) "Ice Floe Validation Dataset", github.com/danielmwatkins/ice_floe_validation_dataset
+Watkins, D.M. (2025) "Ice Floe Validation Dataset", Zenodo, (doi: 10.5281/zenodo.17716713)[https://doi.org/10.5281/zenodo.17716713]
 
-and check back for updates.
+The Zenodo DOI will always link to the newest version of the dataset.
 
-
-# Acknowledgments
-Creation of the dataset was supported by grants from NASA and the US Office of Naval Research. Contributors to the data validation and labeling include Ellen Buckley, Minki Kim, Emma Slaght, and Ethan Register.
+# acknowledgments
+Creation of the dataset was supported by grants from NASA and the US Office of Naval Research, under the direction of Dr. Monica Wilhelmus (wilhelmuslab.me)[https://wilhelmuslab.me]. Contributors to the data validation and labeling include Ellen Buckley, Minki Kim, Emma Slaght, and Ethan Register.
 
