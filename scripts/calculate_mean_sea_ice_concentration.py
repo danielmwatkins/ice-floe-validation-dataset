@@ -9,7 +9,7 @@ import pandas as pd
 import pyproj
 
 # Location of monthly SIC files
-sic_dataloc = '...' # Add path to location where monthly NSIDC CDR 5 files have been downloaded 
+sic_dataloc = '' # Add path to location where monthly NSIDC CDR 5 files have been downloaded 
 
 files = os.listdir(sic_dataloc)
 files = [f for f in files if '_2' in f]
@@ -39,10 +39,10 @@ idx_mask = (lats < 75) & ((lons >= 0) & (lons < 160))
 idx_mask = idx_mask | ((lats < 70) & (lons > 160))
 idx_mask = idx_mask | ((lats < 70) & (lons < -160))
 idx_mask = idx_mask | ((lats < 75) & ((lons > -90) & (lons <= -30)))
-month_data[9]['cdr_seaice_conc_monthly'] = month_data[9]['cdr_seaice_conc_monthly'].where(idx_mask)
+month_data[9]['cdr_seaice_conc_monthly'] = month_data[9]['cdr_seaice_conc_monthly'].where(~idx_mask)
 
 # save results
 for month, name in zip([4, 9], ['april', 'september']):
     ds = month_data[month]
     ds.encoding = {'source': 'NSIDC CDR v5'}
-    ds.to_netcdf('../data/nsdic/mean_sic_{n}_2000-2024.nc'.format(n=name))
+    ds.to_netcdf('../data/nsidc/mean_sic_{n}_2000-2024.nc'.format(n=name))
