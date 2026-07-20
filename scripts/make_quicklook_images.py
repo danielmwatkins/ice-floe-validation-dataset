@@ -3,10 +3,7 @@ import numpy as np
 import os
 import pandas as pd
 import ultraplot as pplt
-import rasterio as rio
-from rasterio.plot import reshape_as_image
-from sklearn.model_selection import KFold
-from scipy.interpolate import interp1d
+import skimage.io as io
 
 # Load the list of cloud clearing evaluation cases
 dataloc = '../../ice_floe_validation_dataset/'
@@ -53,6 +50,8 @@ lf_dataloc = dataloc + 'data/validation_dataset/binary_landfast/'
 masie_ice_loc = dataloc + 'data/masie/seaice/'
 masie_land_loc = dataloc + 'data/masie/landmask/'
 
+water_loc = dataloc + 'data/validation_dataset/binary_water_samples/'
+
 tc_images = {}
 fc_images = {}
 cf_images = {}
@@ -61,28 +60,30 @@ lf_images = {}
 lm_images = {}
 mi_images = {}
 ml_images = {}
+wm_images = {}
 
 missing = []
 for row, data in df.iterrows():
     for datadir, imtype, data_dict in zip([tc_dataloc, fc_dataloc, cf_dataloc,
                                            lb_dataloc, lf_dataloc, lm_dataloc,
-                                           masie_ice_loc, masie_land_loc],
+                                           masie_ice_loc, masie_land_loc, water_loc],
                                           ['truecolor', 'falsecolor', 'cloudfraction_numeric',
                                            'binary_floes', 'binary_landfast', 'binary_landmask',
-                                           'seaice', 'landmask'],
+                                           'seaice', 'landmask', 'binary_water_samples'],
                                           [tc_images, fc_images, cf_images,
                                            lb_images, lf_images, lm_images,
-                                           mi_images, ml_images]):
-        try:
+                                           mi_images, ml_images, wm_images]):
+        if os.path.exists(datadir + fname(df.loc[row, :], imtype)):                          
             if imtype != 'cloudfraction_numeric':
-                with rio.open(datadir + fname(df.loc[row,:], imtype)) as im:
-                    data_dict[row] = im.read()
+                data_dict[row] = io.imread(datadir + fname(df.loc[row,:], imtype))
+                if 'binary' in imtype:
+                    if len(data_dict[row].shape) == 3:
+                        data_dict[row] = data_dict[row][:, :, 0]
             else:
                 data_dict[row] = pd.read_csv(datadir + fname(df.loc[row,:], imtype), index_col=0) 
                 data_dict[row].index = data_dict[row].index.astype(int)
                 data_dict[row].columns = data_dict[row].columns.astype(int)
-                
-        except:
+        else:
             if imtype in ['falsecolor', 'cloudfraction_numeric', 'landmask']:
                 print('Couldn\'t read', fname(df.loc[row,:], imtype), imtype)
             elif imtype == 'binary_floes':
@@ -94,6 +95,12 @@ for row, data in df.iterrows():
             elif imtype in ['seaice', 'landmask']: # masie images
                 missing.append(fname(df.loc[row,:], imtype))
                 
+# Make the index of the df a unique case label
+df.index = [x.case_number + '_' + x.satellite for row, x in df.iterrows()]
+
+df['cloud_fraction_modis'] = np.nan
+for case in cf_images:
+    df.loc[case, 'cloud_fraction_modis'] = np.mean(cf_images[case]/100)
 
 # Make the index of the df a unique case label
 df.index = [x.case_number + '_' + x.satellite for row, x in df.iterrows()]
@@ -113,19 +120,45 @@ for case in fc_images:
     
     fig, axs = pplt.subplots(ncols=3, nrows=2)
 
-    for ax, data, title in zip(axs[0,:], 
-                              [tc_images[case], fc_images[case], cf_images[case]],
-                              ['TC Image', 'FC Image', 'Cloud Fraction (%)']):
-        if title in ['TC Image', 'FC Image']:
-            ax.imshow(reshape_as_image(data))
-        elif title == 'Cloud Fraction (%)':
-            c = ax.pcolormesh(data.values, vmin=0, vmax=100, N=17, cmap='Blues')
-            ax.colorbar(c, label='Cloud Fraction (%)')
-            ax.format(urtitle='Manual: {c0}%\nModis: {c1}'.format(c0=cf_manual, c1=cf_modis))
-        ax.format(title=title, yreverse=True)
+    axs[0,0].imshow(tc_images[case])
+    
+    axs[0,0].format(title='True Color')
+    axs[0,1].imshow(fc_images[case])
+    axs[0,1].format(title='False Color')
+    c = axs[0,2].pcolormesh(cf_images[case].values, vmin=0, vmax=100, N=17, cmap='Blues_r')
+    axs[0,2].colorbar(c, label='Cloud Fraction (%)')
+    axs[0,2].format(urtitle='Manual: {c0}%\nModis: {c1}'.format(c0=cf_manual, c1=cf_modis))
+        
+    # Masks alone
+    axs[1, 0].imshow(np.ma.masked_array(lm_images[case], mask=lm_images[case] == 0), c='gray9')
+    if case in lb_images:
+        axs[1,0].imshow(np.ma.masked_array(lb_images[case], mask=lb_images[case]==0), c='red5')
+    if case in lf_images:
+        axs[1,0].imshow(np.ma.masked_array(lf_images[case], mask=lf_images[case]==0), c='gold')
+    if case in wm_images:
+        axs[1,0].imshow(np.ma.masked_array(wm_images[case], mask=wm_images[case]==0), c='blue6')
+
+
+    # Masks overlay TC
+    axs[1,1].imshow(tc_images[case])
+    axs[1, 1].imshow(np.ma.masked_array(lm_images[case], mask=lm_images[case] == 0), c='darkgray')
+    clouds = cf_images[case] >= 75
+    axs[1, 1].imshow(np.ma.masked_array(clouds, mask=clouds==0), c='blue3', alpha=0.5)
+
+    if case in lb_images:
+        outlines = lb_images[case] - erosion(lb_images[case])
+        axs[1,1].imshow(np.ma.masked_array(outlines, mask=outlines==0), c='red5')
+    if case in lf_images:
+        outlines = lf_images[case] - erosion(lf_images[case])
+        axs[1,1].imshow(np.ma.masked_array(outlines, mask=outlines==0), c='gold')
+    if case in wm_images:
+        outlines = wm_images[case] - erosion(wm_images[case])
+        axs[1,1].imshow(np.ma.masked_array(outlines, mask=outlines==0), c='blue3')
+    axs[1, 1].imshow(np.ma.masked_array(clouds, mask=clouds==0), c='blue3', alpha=0.5)
+    
     
     # plot MASIE data
-    ax = axs[1, 0]
+    ax = axs[1, 2]
     masie_ice = mi_images[case].squeeze()
     masie_land = ml_images[case].squeeze()
     ax.imshow(np.ma.masked_array(masie_land, mask=masie_land != 1), c='steelblue')
@@ -137,42 +170,20 @@ for case in fc_images:
         h.append(ax.plot([],[],m='s', lw=0, c=c, edgecolor='k'))
     ax.legend(h, ['Water', 'Ice', 'Coast', 'Land'], loc='b', ncols=2)
     ax.format(title='MASIE')
-    
-    
-    # plot manual label data on the next two axes
-    binary_land = lm_images[case][0,:,:]
-    clouds25 = (cf_images[case] >= 25).astype(int)
-    clouds50 = (cf_images[case] >= 50).astype(int)
-    clouds = (clouds25 + clouds50)/2
-
-    for ax in axs[1, 1:]:
-        ax.imshow(np.ma.masked_array(binary_land, mask=binary_land == 0), c='gray9')
-        if case in lb_images:
-            manual_ice = lb_images[case][0,:,:]
-            ax.imshow(np.ma.masked_array(manual_ice, mask=manual_ice==0), c='red5')
-        else:
-            ax.format(ultitle='No ice mask')
-        
-        if case in lf_images:
-            manual_landfast = lf_images[case][0,:,:]
-            ax.imshow(np.ma.masked_array(manual_landfast, mask=manual_landfast == 0), c='yellow4')
-        else:
-            ax.format(urtitle='No landfast mask')
-
-    # Overlay clouds on last pannel
-    ax.imshow(np.ma.masked_array(clouds, mask=clouds==0), cmap='Blues', vmin=0, vmax=2, alpha=0.5)
-        
+       
     h = []
-    for c in ['red5', 'yellow4', 'darkgray', 'lightblue']:
+    for c in ['red5', 'yellow4', 'darkgray', 'w']:
         h.append(ax.plot([],[],m='s', lw=0, c=c, edgecolor='k'))
+    axs[1,0].legend(h, ['Sea Ice', 'Landfast Ice', 'Land', 'No Labels'], loc='b', ncols=2)
+    axs[1,0].format(title='Manual Labels')
 
-    axs[1,1].legend(h[:-1], ['Sea Ice', 'Landfast Ice', 'Land'], loc='b', ncols=2)
-    axs[1,1].format(title='Manual Labels')
-    
-        
-    axs[1,2].legend(h, ['Sea Ice', 'Landfast Ice', 'Land', 'MODIS cloud'], loc='b', ncols=2)
-    axs[1,2].format(title='Manual Labels + Cloud')
+    h = []
+    for c in ['red5', 'yellow4', 'darkgray', 'blue2']:
+        h.append(ax.plot([],[],m='s', lw=0, c=c, edgecolor='k'))
+    axs[1,1].legend(h, ['Sea Ice', 'Landfast Ice', 'Land', 'MODIS cloud > 75%'], loc='b', ncols=2)
+    axs[1,1].format(title='Manual Labels Overlay')
     
     axs.format(yreverse=True, suptitle=case.replace('_', ' ').title() + ' ' + region.replace('_', ' ').title())
     fig.save('../data/validation_dataset/quicklook_images/' + case + '_' + region + '_quicklook.png', dpi=300)
     pplt.close(fig)
+    
