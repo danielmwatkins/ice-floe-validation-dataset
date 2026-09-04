@@ -1,36 +1,36 @@
 001, terra: reclassified landfast ice (likely cloud deck)
-001, aqua: reclassified landfast ice (likely cloud deck)
-002, terra: 
+001, aqua: reclassified landfast ice (likely cloud deck); aa: one floe at the bottom right
 002, aqua: 
-003, terra: 
+002, terra: 
 003, aqua: 
-004, terra: 
+003, terra: 
 004, aqua: 
-005, terra: 
+004, terra: aa: floe at (220, 300) (dmw: maybe, difficult to discern)
+005, terra: aa: (150, 320)
 005, aqua: 
-006, terra: dw: cleaned edges and added more floes
+006, terra: dw: cleaned edges and added more floes; aa: most beautiful images might require hardest of the works
 006, aqua: dw: cleaned edges and added more floes
-007, aqua: 
+007, aqua: aa: very impressive!
 007, terra: mk: clouds are more sparse compared to another one
-008, terra: ellen: no floes identified. double check this is intentional! daniel: added a few floes based on my best estimates
 008, aqua: daniel: added a few additional floes
+008, terra: ellen: no floes identified. double check this is intentional! daniel: added a few floes based on my best estimates
+009, aqua: aa: (300, 270) (dmw: can't see all sides, so I can't draw a good outline)
 009, terra: 
-009, aqua: 
-010, terra: 
 010, aqua: 
-011, aqua: 
+010, terra: aa: (250, 280)
+011, aqua: aa: more areas need to be covered by water sample
 011, terra: 
-012, terra: daniel: added landfast ice labels
-012, aqua: 
-013, aqua: 
-013, terra: 
-014, aqua: mk: a tiny fraction of clouds exist
-014, terra: mk: a tiny fraction of clouds exist
+012, aqua: aa: (100, 160)
+012, terra: daniel: added landfast ice labels, aa: (40, 160)
+013, terra: aa: (180, 0)
+013, aqua: aa: (220, 0)
+014, terra: mk: a tiny fraction of clouds exist; aa: big individual floe at the center? (dmw: center floe boundaries are ambiguous)
+014, aqua: mk: a tiny fraction of clouds exist; aa: more areas need to be covered by water sample
 015, terra: 
 015, aqua: 
-016, terra: 
+016, terra: aa: some missing floes from its Aqua counterpart. Intentional?
 016, aqua: 
-017, aqua: mk: I can't see the artifacts here dw: bottom left
+017, aqua: mk: I can't see the artifacts here dw: bottom left; aa: (320, 170)
 017, terra: 
 018, aqua: 
 018, terra: 
@@ -40,9 +40,9 @@
 020, terra: mk: not sure they are floes dw: changed floes visible to "no". Clearly ice, but sub-pixel sizes.
 021, terra: 
 021, aqua: 
-022, aqua: mk: artifiacts exist in the terra
-022, terra: mk: artifiacts exist in the terra
-023, aqua: 
+022, aqua: mk: artifiacts exist in the terra; aa (200, 200)
+022, terra: mk: artifiacts exist in the terra; aa: (240, 380)
+023, aqua: aa: (350, 380)
 023, terra: 
 024, aqua: 
 024, terra: 
@@ -54,100 +54,100 @@
 027, terra: 
 028, aqua: 
 028, terra: 
-029, aqua: dmw: added a few more floes
 029, terra: dmw: added a few more floes
-030, aqua: 
+029, aqua: dmw: added a few more floes
 030, terra: 
+030, aqua: 
 031, aqua: 
-031, terra: 
-032, aqua: 
-032, terra: 
+031, terra: aa: (30, 240)
+032, terra: aa: more floes can be added on top right
+032, aqua: aa: (250, 40)
+033, terra: aa: (180, 220)
 033, aqua: thin and opaque clouds present
-033, terra: 
-034, aqua: 
 034, terra: mk: a less fraction of clouds exist
+034, aqua: 
 035, aqua: 
 035, terra: 
-036, aqua: dw: redrew due to missing psd file
-036, terra: dw: redrew due to missing psd file
-037, aqua: dw: landfast ice checked on Worldview
+036, aqua: dw: potential floe is too ambiguous
+036, terra: dw: potential floe is too ambiguous
 037, terra: 
+037, aqua: dw: landfast ice checked on Worldview
 038, aqua: 
 038, terra: 
-039, aqua: mk: it seems there are also moving floes
 039, terra: mk: it seems there are also moving floes
+039, aqua: mk: it seems there are also moving floes; dw: false color image missing
 040, aqua: no ice - check data
-040, terra: no ice - check data;
+040, terra: no ice - check data
 041, aqua: 
 041, terra: 
 042, aqua: 
 042, terra: 
 043, aqua: 
-043, terra: 
-044, aqua: Ice floe-visible
+043, terra: aa: might be more floes in the upper half of the image (dmw: floe boundaries there are too unclear to label confidently)
 044, terra: Ice floe-visible; changed cloud fraction to 0.7
+044, aqua: Ice floe-visible
 045, aqua: 
 045, terra: 
-046, aqua: 
 046, terra: 
-047, aqua: 
+046, aqua: 
 047, terra: 
-048, aqua: 
+047, aqua: 
 048, terra: 
-049, aqua: 
+048, aqua: 
 049, terra: 
-050, aqua: 
+049, aqua: 
 050, terra: 
+050, aqua: 
 051, aqua: 
 051, terra: 
 052, aqua: 
 052, terra: 
 053, aqua: 
 053, terra: 
-054, aqua: 
 054, terra: 
-055, aqua: 
+054, aqua: 
 055, terra: 
-056, aqua: 
+055, aqua: 
 056, terra: 
+056, aqua: 
 057, aqua: 
 057, terra: 
-058, aqua: 
 058, terra: 
+058, aqua: 
 059, aqua: 
-059, terra: 
+059, terra: dmw: too much cloud cover over the water
 060, aqua: 
 060, terra: 
-061, aqua: 
 061, terra: 
-062, aqua: removed labeled floes that were too small or too similar to clouds
+061, aqua: 
 062, terra: removed labeled floes that were too small or too similar to clouds
-063, aqua: 
+062, aqua: removed labeled floes that were too small or too similar to clouds
 063, terra: 
+063, aqua: aa: more floes can be identified but the best one so far!
 064, aqua: dw: floes too small to label
 064, terra: dw: floes too small to label
-065, aqua: 
+065, aqua: aa: more ice floes can be identified
 065, terra: 
 066, aqua: 
 066, terra: Changed cloud fraction from 0.8 to 0.9
 067, aqua: 
 067, terra: 
-068, aqua: Reduced cloud fraction from 1 to 0.9. No landfast ice. Image quality poor.
+068, aqua: Reduced cloud fraction from 1 to 0.9. No landfast ice. Image quality poor.; aa: is that a huge floe on top?
 068, terra: Reduced cloud fraction from 1 to 0.9. No landfast ice. Image quality poor.
 069, aqua: No landfast ice visible. Reduced cloud fraction from 1 to 0.7
 069, terra: No landfast ice visible. Reduced cloud fraction from 1 to 0.8
-070, aqua: 
 070, terra: 
+070, aqua: 
+071, terra: Changed cloud frac from 0 to 0.1, none to thin; aa: (320, 140)
 071, aqua: 
-071, terra: Changed cloud frac from 0 to 0.1, none to thin
 072, aqua: 
 072, terra: 
-073, aqua: Ice floes are actually visible here. Add to floe labeling.
 073, terra: 
+073, aqua: Ice floes are actually visible here. Add to floe labeling.; aa: (200, 275)
 074, aqua: 
 074, terra: 
-075, aqua: 
 075, terra: 
+075, aqua: 
 076, aqua: Reduced cloud frac from 1 to 0.8, cloud type to scattered. No floes visible.
 076, terra: Reduced cloud frac from 1 to 0.8, cloud type to scattered. No floes visible.
 077, aqua: No landfast ice visible.
@@ -157,7 +157,7 @@
 079, aqua: dw: some likely ice visible, edges too indistinct to label
 079, terra: dw: some likely ice visible, edges too indistinct to label
 080, aqua: 
-080, terra: 
+080, terra: aa: missing detected floes from its Aqua counterpart (dmw: floes are either too small or too obscured to label)
 081, aqua: No landfast ice visible.
 081, terra: No landfast ice visible.
 082, aqua: 
@@ -168,126 +168,126 @@
 084, terra: 
 085, aqua: 
 085, terra: 
-086, aqua: obscured
 086, terra: one or two floes visible
+086, aqua: obscured
 087, aqua: 
 087, terra: 
-088, aqua: es: changed cloud fraction from 0.1 to 0.9, , dw: floe boundaries not clear enough to label
 088, terra: es: changed artifacts no to yes, dw: floe boundaries not clear enough to label
+088, aqua: es: changed cloud fraction from 0.1 to 0.9, , dw: floe boundaries not clear enough to label
 089, aqua: dw: sea ice floes are all sub-pixel resolution
-089, terra: 
+089, terra: aa: (380, 240)?
 090, aqua: 
 090, terra: 
 091, aqua: with this and a few others, had to check QGIS and worldview to see if it was landfast ice
-091, terra: 
+091, terra: aa: manual label looks quite strange compared to the true and false color image
 092, aqua: Rounded 0.95 up to 1; changed artifacts to yes (es) also can't really see any ice? but leaving minki's comments since you can see ice in the terra one ?
 092, terra: Rounded 0.95 up to 1
-093, aqua: checked on map. patch of ice at top of image is landfast ice. near island.
 093, terra: checked on map. patch of ice at top of image is landfast ice. near island.
+093, aqua: checked on map. patch of ice at top of image is landfast ice. near island.
 094, aqua: changed cloud_category from thick to opaque es
-094, terra: changed cloud_category from thick to opaque es
-095, aqua: 
+094, terra: changed cloud_category from thick to opaque es; aa: manual label looks quite strange compared to the true and false color image
 095, terra: 
+095, aqua: aa: (100, 350)
 096, aqua: changed cloud_category from thick to opaque es
 096, terra: changed cloud_category from thick to opaque es
-097, aqua: 
 097, terra: 
-098, aqua: changed visible_sea_ice to yes es
+097, aqua: 
 098, terra: changed visible_sea_ice to yes es
-099, aqua: patches of ice, may or may not actually be floes. dw: labeled some objects that seem distinct, but they are borderline
+098, aqua: changed visible_sea_ice to yes es; aa: more floes can be detecetd on top right regions
 099, terra: es: changed cloud fraction from 0.3 to 0.5; dw: labeled a few objects, but this is new ice and is very early in the formation stages.
-100, aqua: checked on map. close enough to Russian coast that I assume the visible ice sheet is landfast ice
+099, aqua: patches of ice, may or may not actually be floes. dw: labeled some objects that seem distinct, but they are borderline
 100, terra: checked on map. close enough to Russian coast that I assume the visible ice sheet is landfast ice
-101, aqua: Rounded 0.95 up to 1; dw: changed visible floes to no since floes to heavily obscured to confidently label
+100, aqua: checked on map. close enough to Russian coast that I assume the visible ice sheet is landfast ice
+101, aqua: Rounded 0.95 up to 1; dw: changed visible floes to no since floes to heavily obscured to confidently label; aa: I agree, I first also thought those two are visible floes
 101, terra: Rounded 0.95 up to 1; dw: changed visible floes to no since floes to heavily obscured to confidently label
 102, aqua: 
 102, terra: 
-103, aqua: added floe that was marked in the terra image
 103, terra: 
-104, aqua: 
+103, aqua: added floe that was marked in the terra image
 104, terra: 
-105, aqua: Rounded 0.05 up to 0.1
+104, aqua: aa: a few floes are clearer here compared to its Aqua counterpart
+105, aqua: Rounded 0.05 up to 0.1; aa: I think the top center one is cloud
 105, terra: 
 106, aqua: 
 106, terra: 
-107, aqua: 
 107, terra: 
-108, aqua: 
+107, aqua: 
+108, aqua: aa: very complicated image, but I think there is a flow in (320, 120)
 108, terra: 
-109, aqua: 
+109, aqua: aa: (160, 110)
 109, terra: changed from 0.5 to 0.6
-110, aqua: added a few floes
 110, terra: added floes
-111, aqua: 
+110, aqua: added a few floes
 111, terra: 
-112, aqua: 
+111, aqua: aa: (300, 70)
 112, terra: 
-113, aqua: 
-113, terra: 
+112, aqua: 
+113, terra: aa: more floes can be detecetd in the same region where two are detected
+113, aqua: aa: few floes are visible but strong presence of cloud might interfere with the confidence level
 114, aqua: 
 114, terra: 
 115, aqua: 
 115, terra: 
+116, terra: verified landfast ice via worldview; aa: that was such an elite catch!
 116, aqua: changed from 1 to 0.9
-116, terra: verified landfast ice via worldview
-117, aqua: 
 117, terra: dmw: floe split by artiface; floe outline represents estimate of true shape
-118, aqua: changed thin to scattered
+117, aqua: 
 118, terra: changed thin to scattered
-119, aqua: 
+118, aqua: changed thin to scattered
 119, terra: 
+119, aqua: 
 120, aqua: 
 120, terra: 
-121, aqua: 
 121, terra: 
-122, aqua: 
+121, aqua: 
 122, terra: 
-123, aqua: 
-123, terra: 
-124, aqua: 
+122, aqua: 
+123, aqua: aa: (40, 370) (dmw: fixed)
+123, terra: aa: (40, 370), more floes can be detected (dmw: fixed)
 124, terra: 
-125, aqua: 
+124, aqua: 
 125, terra: 
+125, aqua: 
 126, aqua: 
 126, terra: 
 127, aqua: mk: artifacts here
 127, terra: 
 128, aqua: 
 128, terra: mk: images are blurred
-129, aqua: 
 129, terra: 
+129, aqua: 
 130, aqua: changed clouds to thin
 130, terra: changed clouds to thin
-131, aqua: 
 131, terra: 
-132, aqua: 
+131, aqua: 
 132, terra: 
+132, aqua: aa: (360, 280)
 133, aqua: 
 133, terra: 
 134, aqua: possible tiny floes; mk: mostly cloudy-different date(20100812)
 134, terra: possible tiny floes; mk: mostly cloudy-different date(20100812)
-135, aqua: 
-135, terra: 
-136, aqua: 
+135, terra: aa: possible tiny floes
+135, aqua: aa: possible tiny floes
 136, terra: 
+136, aqua: 
 137, aqua: 
 137, terra: 
 138, aqua: 
 138, terra: 
 139, aqua: 
 139, terra: 
-140, aqua: 
-140, terra: 
-141, aqua: 
+140, terra: aa: possible tiny floes
+140, aqua: aa: possible tiny floes
 141, terra: 
+141, aqua: 
 142, terra: 
 142, aqua: 
 143, aqua: 
 143, terra: 
 144, aqua: changed clouds to thin
 144, terra: changed clouds to opaque
-145, aqua: changed visible_floes to "no"
 145, terra: changed visible_floes to "no"
+145, aqua: changed visible_floes to "no"
 146, aqua: 
 146, terra: 
 147, aqua: 
@@ -300,36 +300,36 @@
 150, terra: dw: increased cloud fraction
 151, aqua: 
 151, terra: 
-152, aqua: 
+152, aqua: aa: (140, 230)?
 152, terra: 
-153, aqua: 
 153, terra: 
+153, aqua: 
 154, aqua: 
 154, terra: 
-155, aqua: 
+155, aqua: aa: possible floes on left-center
 155, terra: 
-156, aqua: 
 156, terra: 
+156, aqua: 
 157, aqua: 
 157, terra: 
-158, aqua: 
 158, terra: 
+158, aqua: aa: one of the most difficult False Color Image
 159, aqua: 
 159, terra: 
 160, aqua: 
 160, terra: 
-161, aqua: 
 161, terra: 
+161, aqua: 
 162, aqua: 
 162, terra: 
 163, aqua: 
 163, terra: 
-164, aqua: 
 164, terra: 
+164, aqua: 
 165, aqua: 
 165, terra: 
-166, aqua: 
 166, terra: 
+166, aqua: aa: possible tiny floes but I think this one is beautifully done
 167, aqua: 
 167, terra: 
 168, aqua: floes are too small to include. dw: they seem large enough to me
@@ -338,7 +338,7 @@
 169, terra: ice near land, not necessarily actually landfast - could be brash ice, pancakes, etc.  Floes are too small to accurately distinguish.
 170, aqua: 
 170, terra: 
-171, aqua: scene covered in haze - could be smoke or cloud
+171, aqua: scene covered in haze - could be smoke or cloud; aa: yes, could not detect if it requires manual water sample labeling
 171, terra: scene covered in haze - could be smoke or cloud
 172, aqua: 
 172, terra: changed frac from 0.9 to 1
@@ -346,7 +346,7 @@
 173, terra: 
 174, aqua: 
 174, terra: 
-175, aqua: 
+175, aqua: aa: water sample was colllected under the cloud cover
 175, terra: dw: no clear floe shapes
 176, aqua: changed from 0 to 0.2 thin
 176, terra: changed from 0 to 0.2 thin
@@ -354,14 +354,14 @@
 177, terra: 
 178, aqua: Complex ice shapes -- hard to tell stage of growth or distinguish any individual ice floes
 178, terra: Complex ice shapes -- hard to tell stage of growth or distinguish any individual ice floes
-179, aqua: 
+179, aqua: aa: the false color image is a piece of art
 179, terra: 
 180, aqua: 
 180, terra: 
-181, aqua: 
+181, aqua: aa: clear water but under heavy cloud
 181, terra: 
+182, terra: aa: possible floe at the center?
 182, aqua: 
-182, terra: 
 183, aqua: 
 183, terra: 
 184, aqua: 
