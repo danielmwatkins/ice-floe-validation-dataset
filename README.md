@@ -1,5 +1,8 @@
 # ice floe validation dataset
-The Ice Floe Validation Dataset is a collection of randomly sampled 100 km by 100 km MODIS scenes from the _Aqua_ and _Terra_ satellites. This repository contains the dataset itself along with the notebooks and scripts used to produce the dataset.
+The Ice Floe Validation Dataset is a collection of randomly sampled scenes spanning the circumpolar Arctic marginal ice zone. Each scene
+
+The GitHub repository includes the 100 km by 100 km files
+100 km by 100 km MODIS scenes from the _Aqua_ and _Terra_ satellites. This repository contains the dataset itself along with the notebooks and scripts used to produce the dataset.
 
 # contents
 ## data
