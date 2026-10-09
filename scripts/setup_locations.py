@@ -1,5 +1,5 @@
 """
-Generate table with region definitions
+Generate table with region definitions, using bounding boxes in EPSG3413 coordinates.
 """
 
 import pandas as pd
@@ -36,9 +36,9 @@ regions = {
          'lower_y': 753120
         },
     'bering_chukchi_seas':
-        {'left_x': -1472117 - 1500e3,
+        {'left_x': -2972117,
          'right_x': -1472117,
-         'upper_y': 753120 + 1500e3,
+         'upper_y': 2253120,
          'lower_y': 753120
         },
     'beaufort_sea': 
@@ -51,7 +51,7 @@ regions = {
         {'left_x': -987231,
          'right_x': -97937,
          'upper_y': -818234,
-         'lower_y': -818234 - 1500e3, 
+         'lower_y': -2318234, 
         },
     'hudson_bay':
         {'left_x': -2795941,
@@ -86,4 +86,6 @@ location_df = pd.DataFrame(regions).T
 print(location_df)
 
 
-location_df.loc[:, ['center_lat', 'center_lon', 'center_x', 'center_y', 'left_x', 'right_x', 'lower_y', 'upper_y']].to_csv('../data/metadata/region_definitions.csv')
+location_df.loc[:, ['center_lat', 'center_lon', 'center_x', 'center_y',
+                    'left_x', 'right_x', 'lower_y', 'upper_y']].to_csv(
+    '../data/metadata/region_definitions.csv')
