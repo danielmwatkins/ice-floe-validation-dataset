@@ -8,9 +8,10 @@ time series to data/metadata/daily_sea_ice_fraction.csv."""
 import numpy as np
 import pandas as pd
 import xarray as xr
+import rasterio as rio
 import os
 
-sic_dataloc = '/Users/dwatkin2/Documents/research/data/nsidc_daily_cdr_v4/' 
+sic_dataloc = '/Users/dwatkin2/Documents/research/data/nsidc_daily_cdr_v6/' 
 saveloc = '../data/metadata/'
 regions = pd.read_csv('../data/metadata/region_definitions.csv', index_col=0)
 print(regions)
@@ -25,12 +26,12 @@ def compute_sic(left_x, right_x, bottom_y, top_y, sic_data):
     # Note: this is in polar stereographic coordinates
     # We should update to an equal area method if possible
     
-    x_idx = (sic_data.xgrid >= left_x) & (sic_data.xgrid <= right_x)
-    y_idx = (sic_data.ygrid >= bottom_y) & (sic_data.ygrid <= top_y)
+    x_idx = (sic_data.x >= left_x) & (sic_data.x <= right_x)
+    y_idx = (sic_data.y >= bottom_y) & (sic_data.y <= top_y)
     
-    with_ice = ((sic_data.sel(x=x_idx, y=y_idx)['cdr_seaice_conc'] > 0.15) & \
+    with_ice = ((sic_data.sel(x=x_idx, y=y_idx)['cdr_seaice_conc'] >= 0.15) & \
                 (sic_data.sel(x=x_idx, y=y_idx)['cdr_seaice_conc'] <= 1))
-    coast_mask = (sic_data.sel(x=x_idx, y=y_idx)['cdr_seaice_conc'] > 1).sum() 
+    coast_mask = (sic_data.sel(x=x_idx, y=y_idx)['cdr_seaice_conc'].isnull()).sum() 
     total_area_pixels = np.prod(with_ice.shape)
     sic_area_pixels = with_ice.sum().data
     return np.round(sic_area_pixels/(total_area_pixels - coast_mask.data), 3)
@@ -39,15 +40,16 @@ for year in range(2003, 2023):
     files = os.listdir(sic_dataloc + str(year))
     for file in files:
         if '.nc' in file:
-            date = pd.to_datetime(file.split('_')[4], format='%Y%m%d')
+            date = pd.to_datetime(file.split('_')[2], format='%Y%m%d')
             if (date.month >= 3) & (date.month <= 9):
-                with xr.open_dataset(sic_dataloc + str(year) + '/' + file) as ds_sic:
+                with xr.open_dataset(sic_dataloc + str(year) + '/' + file, decode_coords="all") as ds_sic:
+                    ds = ds_sic.rio.reproject("EPSG:3413")
                     date_index.append(date)
                     temp_results = []
                     for region in regions.index:
                         temp_results.append(
                             compute_sic(regions.loc[region, 'left_x'], regions.loc[region, 'right_x'], 
-                            regions.loc[region, 'lower_y'], regions.loc[region, 'upper_y'], ds_sic))
+                            regions.loc[region, 'lower_y'], regions.loc[region, 'upper_y'], ds))
                 results.append(temp_results)
     
 sic_timeseries = pd.DataFrame(results, index=date_index, columns=regions.index)

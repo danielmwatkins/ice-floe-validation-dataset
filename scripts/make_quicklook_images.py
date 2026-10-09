@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import ultraplot as pplt
 import skimage.io as io
+from skimage.morphology import erosion
 
 # Load the list of cloud clearing evaluation cases
 dataloc = '../../ice_floe_validation_dataset/'

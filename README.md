@@ -1,5 +1,23 @@
 # ice floe validation dataset
-The Ice Floe Validation Dataset is a collection of randomly sampled 100 km by 100 km MODIS scenes from the _Aqua_ and _Terra_ satellites. This repository contains the dataset itself along with the notebooks and scripts used to produce the dataset.
+The Ice Floe Validation Dataset is a collection of randomly sampled scenes spanning the circumpolar Arctic marginal ice zone. Samples come from 9 regions, as defined in the table below.
+
+|     | Center Latitude | Center Longitude |
+| --- |  --- | --- |
+| Greenland Sea	| 74.698 | -17.601 |
+| Barents-Kara Seas	| 75.617 | 53.223 |
+| Laptev Sea | 75.9228	| 124.689 |
+| East Siberian Sea	| 75.171 | 165.192 |
+| Bering Chukchi Seas| 65.596 | -169.076 |
+| Beaufort Sea | 74.860	| -142.840 |
+| Baffin Bay | 74.768 | -64.085 |
+| Hudson Bay | 58.143 | -83.965 |
+| Sea of Okhostk | 58.000 | 148.000 |
+
+The 
+
+
+The GitHub repository includes the 100 km by 100 km files
+100 km by 100 km MODIS scenes from the _Aqua_ and _Terra_ satellites. This repository contains the dataset itself along with the notebooks and scripts used to produce the dataset.
 
 # contents
 ## data
