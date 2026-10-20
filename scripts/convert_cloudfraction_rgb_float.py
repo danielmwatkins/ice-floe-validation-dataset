@@ -4,13 +4,19 @@ error between pixel RGB and lookup table RGB."""
 
 import skimage
 import rasterio as rio
+from rasterio.plot import reshape_as_image
+import pandas as pd
+import numpy as np
+import ultraplot as uplt
+import os
+
 dataloc = "../data/modis/cloudfraction/"
-plot_examples = True
-recompute = False
+plot_examples = False
+recompute = True
 
 key = skimage.io.imread("../data/metadata/color_key.png")
 vals = pd.DataFrame(np.mean(key[:, :, :-1], axis=0), columns=['r', 'g', 'b']).round(0).astype(int)
-bin_mean_values = vals2.iloc[6::14,:].astype(int)[['r', 'g', 'b']]
+bin_mean_values = vals.iloc[6::14,:].astype(int)[['r', 'g', 'b']]
 
 n = len(bin_mean_values)
 bin_edges = np.linspace(0, 100, n+1)
@@ -23,10 +29,11 @@ cf_images = {}
 if recompute:
     for file in os.listdir(dataloc):
         if '.tiff' in file:
-            cn, region, dx, date, suffix = file.split('-')
-            satellite, imtype, res, ftype = suffix.split('.')
+            print(file.split('-'))
+            cn, region, dx, suffix = file.split('-')
+            date, satellite, imtype, res, ftype = suffix.split('.')
             case = cn + '_' + satellite
-            rio.open(datadir + file) as im:
+            with rio.open(dataloc + file) as im:
                 cl_images[case] = im.read()
         
             color_im = reshape_as_image(cl_images[case])
@@ -38,12 +45,12 @@ if recompute:
             cf_images[case] = cloudfrac_im
         
             # newname format: 001-baffin_bay-20220911-aqua-cloudfraction
-            newfile = '-'.join(cn, region, date, satellite, 'cloudfraction') + '.csv'
+            newfile = '-'.join([cn, region, date, satellite, 'cloudfraction']) + '.csv'
             pd.DataFrame(cf_images[case]).to_csv("../data/modis/cloudfraction_numeric/" + newfile)         
 
 
 if plot_examples:
-    fig, ax = pplt.subplots()
+    fig, ax = uplt.subplots()
     ax.imshow(key, extent=[0, 100, 0, 10])
     ax.format(yformatter='none', xlabel='Cloud fraction (%)')
     fig.save('../figures/colorbar_cloudfrac.png', dpi=300)
