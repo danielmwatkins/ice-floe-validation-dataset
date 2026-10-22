@@ -32,15 +32,33 @@ df_aqua_fsd.head()
 
 
 regions = pd.read_csv('../data/metadata/region_definitions.csv', index_col=0)
+regions['print_title'] = [c.replace('_', ' ').title().replace('Of', 'of') for c in regions.index]
 
 colors = {region: c['color'] for region, c in zip(
             regions.index,
-            pplt.Cycle('dark2', len(regions)))}
+            pplt.Cycle('colorblind10', len(regions)))}
+
+region_order = ['greenland_sea',
+                'barents_kara_seas',
+                'laptev_sea',
+                'sea_of_okhostk',
+                'east_siberian_sea',
+                'bering_chukchi_seas',
+                'beaufort_sea',
+                'hudson_bay',
+                'baffin_bay']
+
+idx = 1
+for region in region_order:
+    regions.loc[region, 'idx_num'] = idx
+    idx += 1
+regions = regions.sort_values('idx_num')
+
+regions.loc['bering_chukchi_seas', 'print_title'] = 'Bering-Chukchi Seas'
+regions.loc['barents_kara_seas', 'print_title'] = 'Barents-Kara Seas'
+
 linestyles = {region: ls for region, ls in zip(regions.index,
                         ['-', '-.', '--', '-', '-.', '--', '-.', '-', '--'])}
-
-regions['print_title'] = [c.replace('_', ' ').title().replace('Of', 'of') for c in regions.index]
-regions = regions.sort_values('center_lon')
 
 for idx, row in regions.iterrows():
     if row.print_title == 'Barents Kara Seas':

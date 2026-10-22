@@ -24,9 +24,9 @@ def compute_sic(left_x, right_x, lower_y, upper_y, sic_data):
 def find_candidates(n_samples, region_info, dx, sic_path,
                     sif_threshold=0.25, margin=50, start_year=2003, end_year=2022,
                     min_samples_per_month=10):
-    """Generate a list of candidate locations for the validation dataset. Initial samples were selected using the
-    same steps as shown here. This function places the steps in one place for convenience, and implements a correction
-    to the SIC calculation used in the initial version.
+    """Generate a list of candidate locations for the validation dataset. Initial samples were
+    selected using the same steps as shown here. This function places the steps in one place for
+    convenience, and implements a correction to the SIC calculation used in the initial version.
     
     n: sets the number of candidates to generate.
     region_info: a row from the region_definitions table. Must include start_doy and end_doy.
